@@ -22,7 +22,8 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
-# mentalmuso
+
+DEVICE_PATH := device/samsung/gts6lwifi
 
 # Architecture
 TARGET_ARCH := arm64
@@ -52,12 +53,14 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
 # Kernel
-TARGET_PREBUILT_KERNEL := device/samsung/gts6lwifi/prebuilt/Image-dtb
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --header_version 1 --board FRPSC27A001
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 androidboot.usbcontroller=a600000.dwc3 firmware_class.path=/vendor/firmware_mnt/image nokaslr printk.devkmsg=on androidboot.selinux=permissive
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image-dtb
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/recovery_dtbo
+BOARD_INCLUDE_RECOVERY_DTBO := true
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --tags_offset 0x01e00000 --header_version 1 --board FRPSC27A001
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=2048 firmware_class.path=/vendor/firmware_mnt/image androidboot.usbcontroller=a600000.dwc3
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
+BOARD_KERNEL_TAGS_OFFSET := 0x01e00000
 BOARD_RAMDISK_OFFSET := 0x02000000
 
 # Platform
@@ -70,9 +73,10 @@ QCOM_BOARD_PLATFORMS += msmnile
 TARGET_OTA_ASSERT_DEVICE := gts6lwifi
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_RECOVERY_FSTAB := device/samsung/gts6lwifi/recovery/root/etc/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 TARGET_COPY_OUT_VENDOR := vendor
+PLATFORM_VERSION := 9.0.0
+PLATFORM_SECURITY_PATCH := 2019-09-30
 
 # System as root
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
@@ -83,16 +87,15 @@ BOARD_AVB_ENABLE := false
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
 # Crypto
-PLATFORM_VERSION := 16.1.0
-PLATFORM_SECURITY_PATCH := 2025-12-31
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FBE := true
 
 # TWRP
-TW_DEVICE_VERSION := 9_mentalmuso
 RECOVERY_VARIANT := twrp
 TW_USE_TOOLBOX := true
-#TW_THEME := landscape_hdpi
-#RECOVERY_TOUCHSCREEN_SWAP_XY := true
-#RECOVERY_TOUCHSCREEN_FLIP_Y := true
 TW_ROTATION := 270
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
@@ -100,7 +103,7 @@ TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 120
+TW_DEFAULT_BRIGHTNESS := 153
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
 TW_INCLUDE_NTFS_3G := true
@@ -110,6 +113,3 @@ TW_EXTRA_LANGUAGES := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_EXCLUDE_TWRPAPP := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
-BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_PREBUILT_DTBOIMAGE := device/samsung/gts6lwifi/prebuilt/dtbo
-
