@@ -76,7 +76,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 TARGET_COPY_OUT_VENDOR := vendor
 PLATFORM_VERSION := 9.0.0
-PLATFORM_SECURITY_PATCH := 2019-09-30
+PLATFORM_SECURITY_PATCH := 2019-11-01
 
 # System as root
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
@@ -93,9 +93,13 @@ TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_FBE := true
 
-# Screen orientation
+# Portrait orientation:
+#
 #TW_THEME := portrait_hdpi
 #TW_ROTATION := 270
+
+# Landscape orientation:
+#
 TW_THEME := landscape_hdpi
 RECOVERY_TOUCHSCREEN_SWAP_XY := true
 RECOVERY_TOUCHSCREEN_FLIP_Y := true
