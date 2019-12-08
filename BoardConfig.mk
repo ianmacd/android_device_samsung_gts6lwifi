@@ -86,13 +86,6 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 BOARD_AVB_ENABLE := false
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
-# Crypto
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
-TARGET_HW_DISK_ENCRYPTION := true
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_FBE := true
-
 # Portrait orientation:
 #
 #TW_THEME := portrait_hdpi
