@@ -6,7 +6,7 @@
 /boot	  emmc   /dev/block/bootdevice/by-name/boot
 /modem	 vfat   /dev/block/bootdevice/by-name/modem		  flags=backup=1;display="Baseband"
 /cache	 ext4   /dev/block/bootdevice/by-name/cache		  flags=backup=1;display="Cache"
-/data	  f2fs   /dev/block/bootdevice/by-name/userdata		  flags=encryptable=footer;length=-16384;fileencryption=ice:aes-256-cts
+/data	  f2fs   /dev/block/bootdevice/by-name/userdata		  flags=encryptable=footer;length=-16384;encryptable=ice:aes-256-cts
 #/dtbo	  emmc   /dev/block/bootdevice/by-name/dtbo		  flags=display="Dtbo";backup=1
 /efs	   ext4   /dev/block/bootdevice/by-name/sec_efs		  flags=backup=1;display="EFS"
 #/firmware      vfat   /dev/block/bootdevice/by-name/apnhlos	  flags=display="Firmware";fsflags=ro
